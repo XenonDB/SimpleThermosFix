@@ -14,16 +14,16 @@ public interface IMixinIInventory extends InventoryHolder {
 	default public InventoryHolder getOwner() {
 		return this;
 	}
-	
+
 	@Override
 	default public Inventory getInventory() {
 		try {
-			//CraftInventory斑篶Αい把计ㄤ摸琌IInventory
+			// CraftInventory斑篶Αい把计ㄤ摸琌IInventory
 			return (Inventory) CraftInventory.class.getConstructors()[0].newInstance(this);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
 			ASMUtils.warn("An exception occure in getInventory() method. This may be a bug. Please report this to mod author.");
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 }

@@ -10,23 +10,23 @@ import java.util.Map;
 public class ASMEntryPoint implements IFMLLoadingPlugin {
 
 	public String[] getASMTransformerClass() {
-		return new String[] {ASMMixinsIInventory.class.getName()};
+		return new String[] { ASMMixinsIInventory.class.getName() };
 	}
-	
+
 	public String getModContainerClass() {
 		return null;
 	}
-	
+
 	public String getSetupClass() {
 		return null;
 	}
-	
+
 	public void injectData(Map<String, Object> paramMap) {
-		
+
 	}
-	
+
 	public String getAccessTransformerClass() {
 		return null;
 	}
-	
+
 }
