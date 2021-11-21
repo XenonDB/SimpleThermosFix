@@ -17,31 +17,29 @@ import net.minecraftforge.classloading.FMLForgePlugin;
 import net.passengerDB.simplethermosfix.asm.interfaces.IMixinIInventory;
 
 /**
- * ¥Ñ©óThermosºİ¹ïIInventory°Ê¤F¤â¸}¡Aª½±µ²K¥[¤F¤@¨Ç­ì¥»¤£¦s¦b¨ä¤¤ªº¤èªk¨ÓÂX¥R¥¦¡A©Ò¥H®Ú¾ÚForge¸ÑÅªªºIInventory¹ê°µªºÃş§O¡A¦bThermosºİ°õ¦æ®É¦³¥i¯à·|¥X²{¿ù»~¾É­P±YªA¡C
- * ¿ù»~ªºµo¥ÍÂI·|¬O¦b¡u¨Ï¥Î§ëÂY¾¹¹ï¦³¹ê§@IInventoryªº«D­ìª©Minecraft¹êÅé§ëÂYª««~¡v®É±Y¼ì¡C
- * ¦]¬°§ëÂY¾¹¦b¨ä¤¤©I¥s¤F¤£¦s¦b­ì©lÃş§O¤¤ªºgetOwner()¤èªk(ªğ¦^Ãş«¬InventoryHolder)¡AµM¦Ó°ò©óForge®Ø¬[¶}µoªº¼Ò²Õ¬O¤£·|¥h¹ê§@³o­Ó¤èªkªº¡A¦]¦¹·|¾É­PAbstractMethodError¡C
- * ·|¤Şµo¸Ó¿ù»~ªº¹êÅéªº¨Ò¤l«h¦³:Å]ªkª÷ÄİªºÃdª«¡BmekanismªºRobit
+ * ç”±æ–¼Thermosç«¯å°IInventoryå‹•äº†æ‰‹è…³ï¼Œç›´æ¥æ·»åŠ äº†ä¸€äº›åŸæœ¬ä¸å­˜åœ¨å…¶ä¸­çš„æ–¹æ³•ä¾†æ“´å……å®ƒï¼Œæ‰€ä»¥æ ¹æ“šForgeè§£è®€çš„IInventoryå¯¦åšçš„é¡åˆ¥ï¼Œåœ¨Thermosç«¯åŸ·è¡Œæ™‚æœ‰å¯èƒ½æœƒå‡ºç¾éŒ¯èª¤å°è‡´å´©æœã€‚
+ * éŒ¯èª¤çš„ç™¼ç”Ÿé»æœƒæ˜¯åœ¨ã€Œä½¿ç”¨æŠ•æ“²å™¨å°æœ‰å¯¦ä½œIInventoryçš„éåŸç‰ˆMinecraftå¯¦é«”æŠ•æ“²ç‰©å“ã€æ™‚å´©æ½°ã€‚
+ * å› ç‚ºæŠ•æ“²å™¨åœ¨å…¶ä¸­å‘¼å«äº†ä¸å­˜åœ¨åŸå§‹é¡åˆ¥ä¸­çš„getOwner()æ–¹æ³•(è¿”å›é¡å‹InventoryHolder)ï¼Œç„¶è€ŒåŸºæ–¼Forgeæ¡†æ¶é–‹ç™¼çš„æ¨¡çµ„æ˜¯ä¸æœƒå»å¯¦ä½œé€™å€‹æ–¹æ³•çš„ï¼Œå› æ­¤æœƒå°è‡´AbstractMethodErrorã€‚
+ * æœƒå¼•ç™¼è©²éŒ¯èª¤çš„å¯¦é«”çš„ä¾‹å­å‰‡æœ‰:é­”æ³•é‡‘å±¬çš„å¯µç‰©ã€mekanismçš„Robit
  * 
- * ÁöµM¦b°õ¦æ®É´Á¨Ó»¡¡A©I¥s¤@­Ó¤èªk®É¡AµL½×¸Ó¤èªk¬O±q¦ó¦Ó¨Ó(¦Û¦æ©w¸q¡A¨Ó¦Û¤÷Ãş§O©Î¦³¹ê§@¹w³]¤èªkªºinterface)¡A¥u­n¡u¦s¦b¦P¼ËÃ±¸p¥H¤Î¦W¤lªº¤èªk¡v¡A³£¥i¥H¥¿±`°õ¦æ¡C
- * ¨Ò¦p¡A§â¤@­Ó¨S¦³¹ê§@IClassTransformerªºÃş§O¡A©w¸q¤F¤@­Ó¦³¹ê§@¤º®eªºpublic byte[] transform(String
- * name, String transformedName, byte[] data)
- * ¨º»ò°õ¦æ®É´Á§â³o­ÓÃş§O±j¨îÂà«¬¦¨IClassTransformer¨Ã©I¥s¨ätransform¤èªk¡A¤@¼Ë¥i¥H¥¿±`°õ¦æ¡C
- * µM¦Ó¡A¹ï©óÅ]ªkª÷ÄİªºÃdª«¡A·|¦³¤@­Ó­P©Rªº°İÃD:
- * Ãdª«Ä~©Ó¤FEntityTameable¡A¨ä¤¤¦³¤@­ÓgetOwner()¤èªk(ªğ¦^Ãş«¬¬OEntity©ÎEntityLivingBase¡A»P¤W­zªºgetOwner()¤£¦P)
- * ³o¾É­PÃdª«µLªkÂ²³æªº·s¼WInventoryHolder
- * getOwner()¨Ó¾AÀ³­×§ï«áªºÃş§O¡A¦]¬°½sÄ¶¾¹¨Ã¤£¤¹³\­«¸ü¬Û¦P¤èªk¦W¡B¬Û¦P°Ñ¼Æ¦ıªğ¦^Ãş«¬¤£¦Pªº¤èªk(¾¨ºŞ³o¦b°õ¦æ®É´Á¬O¥i¦æªº¡A¦]¬°°õ¦æ®É©I¥sªº¤èªkÃ±¸p¥]§t¤Fªğ¦^Ãş«¬¡A¥i¥H³Q¿ë»{¬O¤£¦Pªº¤èªk)
- * µ²ªG´N¬O³o­Ó°İÃDµ´¹ï¤£¥i¯à¦b½sÄ¶®É´Á¸Ñ¨M¡C
+ * é›–ç„¶åœ¨åŸ·è¡Œæ™‚æœŸä¾†èªªï¼Œå‘¼å«ä¸€å€‹æ–¹æ³•æ™‚ï¼Œç„¡è«–è©²æ–¹æ³•æ˜¯å¾ä½•è€Œä¾†(è‡ªè¡Œå®šç¾©ï¼Œä¾†è‡ªçˆ¶é¡åˆ¥æˆ–æœ‰å¯¦ä½œé è¨­æ–¹æ³•çš„interface)ï¼Œåªè¦ã€Œå­˜åœ¨åŒæ¨£ç°½ç½²ä»¥åŠåå­çš„æ–¹æ³•ã€ï¼Œéƒ½å¯ä»¥æ­£å¸¸åŸ·è¡Œã€‚
+ * ä¾‹å¦‚ï¼ŒæŠŠä¸€å€‹æ²’æœ‰å¯¦ä½œIClassTransformerçš„é¡åˆ¥ï¼Œå®šç¾©äº†ä¸€å€‹æœ‰å¯¦ä½œå…§å®¹çš„public byte[] transform(String name, String transformedName, byte[] data)
+ * é‚£éº¼åŸ·è¡Œæ™‚æœŸæŠŠé€™å€‹é¡åˆ¥å¼·åˆ¶è½‰å‹æˆIClassTransformerä¸¦å‘¼å«å…¶transformæ–¹æ³•ï¼Œä¸€æ¨£å¯ä»¥æ­£å¸¸åŸ·è¡Œã€‚
+ * ç„¶è€Œï¼Œå°æ–¼é­”æ³•é‡‘å±¬çš„å¯µç‰©ï¼Œæœƒæœ‰ä¸€å€‹è‡´å‘½çš„å•é¡Œ:
+ * å¯µç‰©ç¹¼æ‰¿äº†EntityTameableï¼Œå…¶ä¸­æœ‰ä¸€å€‹getOwner()æ–¹æ³•(è¿”å›é¡å‹æ˜¯Entityæˆ–EntityLivingBaseï¼Œèˆ‡ä¸Šè¿°çš„getOwner()ä¸åŒ)
+ * é€™å°è‡´å¯µç‰©ç„¡æ³•ç°¡å–®çš„æ–°å¢InventoryHolder getOwner()ä¾†é©æ‡‰ä¿®æ”¹å¾Œçš„é¡åˆ¥ï¼Œå› ç‚ºç·¨è­¯å™¨ä¸¦ä¸å…è¨±é‡è¼‰ç›¸åŒæ–¹æ³•åã€ç›¸åŒåƒæ•¸ä½†è¿”å›é¡å‹ä¸åŒçš„æ–¹æ³•(å„˜ç®¡é€™åœ¨åŸ·è¡Œæ™‚æœŸæ˜¯å¯è¡Œçš„ï¼Œå› ç‚ºåŸ·è¡Œæ™‚å‘¼å«çš„æ–¹æ³•ç°½ç½²åŒ…å«äº†è¿”å›é¡å‹ï¼Œå¯ä»¥è¢«è¾¨èªæ˜¯ä¸åŒçš„æ–¹æ³•)
+ * çµæœå°±æ˜¯é€™å€‹å•é¡Œçµ•å°ä¸å¯èƒ½åœ¨ç·¨è­¯æ™‚æœŸè§£æ±ºã€‚
  * 
- * ¦]¦¹³oÃä³z¹Lasm¦b°õ¦æ®É´Á¤~°µ­×§ï¥HÂ¶¹L½sÄ¶¾¹ªºÀË¬d¡C
- * ±N³Q­×§ï«áªºIInventory¤¤ªºgetOwner()²¾°£¡A¥O¨äÄ~©Ó¦Û©w¸qªº¤¶­±¡A¥H¹F¨ì·s¼W¥H¹w³]¤èªk¹ê§@¤º®eªºgetOwner()
+ * å› æ­¤é€™é‚Šé€éasmåœ¨åŸ·è¡Œæ™‚æœŸæ‰åšä¿®æ”¹ä»¥ç¹éç·¨è­¯å™¨çš„æª¢æŸ¥ã€‚
+ * å°‡è¢«ä¿®æ”¹å¾Œçš„IInventoryä¸­çš„getOwner()ç§»é™¤ï¼Œä»¤å…¶ç¹¼æ‰¿è‡ªå®šç¾©çš„ä»‹é¢ï¼Œä»¥é”åˆ°æ–°å¢ä»¥é è¨­æ–¹æ³•å¯¦ä½œå…§å®¹çš„getOwner()
  * 
- * ¸É¥R1: §ëÂY¾¹¹ï©ó¡u¤è¶ô¡vªº¾Ş§@¨Ã¤£·|³ø¿ù¡A¦]¬°¤è¶ôªº°ò©³Ãş§O¸Ì¤w¸g¹ê§@¤FgetOwner()¡C
- * º|¤æ¹ï©ó³o¨Ç¹êÅéªº¾Ş§@¤]¤£·|³ø¿ù¡A¦]¬°º|¤æ¦³¹ïAbstractMethodError°µ³B¸Ì¡C
+ * è£œå……1: æŠ•æ“²å™¨å°æ–¼ã€Œæ–¹å¡Šã€çš„æ“ä½œä¸¦ä¸æœƒå ±éŒ¯ï¼Œå› ç‚ºæ–¹å¡Šçš„åŸºåº•é¡åˆ¥è£¡å·²ç¶“å¯¦ä½œäº†getOwner()ã€‚
+ * æ¼æ–—å°æ–¼é€™äº›å¯¦é«”çš„æ“ä½œä¹Ÿä¸æœƒå ±éŒ¯ï¼Œå› ç‚ºæ¼æ–—æœ‰å°AbstractMethodErroråšè™•è£¡ã€‚
  * 
- * ¸É¥R2:
- * ³z¹L­×§ï¬°¹w³]¤èªk¨Ã¤£·|¼vÅT¨ì¬J¦³ªº¨S¦³°İÃDªº¤º®e¡C¦]¬°¹ï©ó¨ä¥L®Ú¾Ú³Q­×§ï«áªºIInventoryªº¶}µoªÌ¦Ó¨¥¡A¥L­Ì·|¬İ¨ì¨S¦³¹ê§@¤º®eªºgetOwner()¤èªk¡A±q¦Ó¦b¥¦­Ìªº¹ê§@Ãş¸Ì¦Û¦æ¹ê§@getOwner()¡A³o¼Ë·|ÂĞ»\±¼¹w³]¤èªk¡C
- * ¹ï©óÄ~©Ó¤FIInventory¨Ã¥Bµ¹¤©¤FgetOwner·s¼W¹w³]¤èªkªºª¬ªp:
- * ¥Ñ©ó¦¹¸Ñªk²V¤JªºgetOwner¤èªk¦bÄ~©Óµ²ºc¤W¬O¡u§ó¥[©â¶H¡B¤£¨ãÅé¡vªº¤èªk¡A¦]¦¹³oºØ±¡ªp¤U©w¸qªºgetOwner¤èªk¤@©w¬O¡u§ó¥[¨ãÅé¡vªº¤èªk¡A¦Ó·|¦b°õ¦æ®É´Á©I¥s­ì¥»ªº¤èªk¡C
+ * è£œå……2:
+ * é€éä¿®æ”¹ç‚ºé è¨­æ–¹æ³•ä¸¦ä¸æœƒå½±éŸ¿åˆ°æ—¢æœ‰çš„æ²’æœ‰å•é¡Œçš„å…§å®¹ã€‚å› ç‚ºå°æ–¼å…¶ä»–æ ¹æ“šè¢«ä¿®æ”¹å¾Œçš„IInventoryçš„é–‹ç™¼è€…è€Œè¨€ï¼Œä»–å€‘æœƒçœ‹åˆ°æ²’æœ‰å¯¦ä½œå…§å®¹çš„getOwner()æ–¹æ³•ï¼Œå¾è€Œåœ¨å®ƒå€‘çš„å¯¦ä½œé¡è£¡è‡ªè¡Œå¯¦ä½œgetOwner()ï¼Œé€™æ¨£æœƒè¦†è“‹æ‰é è¨­æ–¹æ³•ã€‚
+ * å°æ–¼ç¹¼æ‰¿äº†IInventoryä¸¦ä¸”çµ¦äºˆäº†getOwneræ–°å¢é è¨­æ–¹æ³•çš„ç‹€æ³:
+ * ç”±æ–¼æ­¤è§£æ³•æ··å…¥çš„getOwneræ–¹æ³•åœ¨ç¹¼æ‰¿çµæ§‹ä¸Šæ˜¯ã€Œæ›´åŠ æŠ½è±¡ã€ä¸å…·é«”ã€çš„æ–¹æ³•ï¼Œå› æ­¤é€™ç¨®æƒ…æ³ä¸‹å®šç¾©çš„getOwneræ–¹æ³•ä¸€å®šæ˜¯ã€Œæ›´åŠ å…·é«”ã€çš„æ–¹æ³•ï¼Œè€Œæœƒåœ¨åŸ·è¡Œæ™‚æœŸå‘¼å«åŸæœ¬çš„æ–¹æ³•ã€‚
  * 
  */
 public class ASMMixinsIInventory implements IClassTransformer {
@@ -76,7 +74,7 @@ public class ASMMixinsIInventory implements IClassTransformer {
 		ClassReader clsReader = new ClassReader(data);
 		clsReader.accept(clsNode, 0);
 
-		// ²¾°£©w¸q¦nªº©â¶H¤èªkgetOwner()
+		// ç§»é™¤å®šç¾©å¥½çš„æŠ½è±¡æ–¹æ³•getOwner()é¿å…ã€ŒgetOwner()è¢«é‡æ–°å®šç¾©æˆæŠ½è±¡æ–¹æ³•ã€
 		boolean foundTarget = clsNode.methods.removeIf(m -> {
 			return (m.access == (Opcodes.ACC_PUBLIC | Opcodes.ACC_ABSTRACT)) && TARGET_METHOD_NAME.equals(m.name)
 					&& TARGET_DESC.equals(m.desc);
@@ -85,7 +83,7 @@ public class ASMMixinsIInventory implements IClassTransformer {
 		if (!foundTarget)
 			return data;
 
-		// ¥O¨äÄ~©Ó¦³©w¸q¹w³]getOwner()¹ê°µªºinterface¨Ó¡u±NgetOwner()·s¼W¹w³]¹ê§@¡v
+		// ä»¤å…¶ç¹¼æ‰¿æœ‰å®šç¾©é è¨­getOwner()å¯¦ä½œçš„interfaceä¾†ã€Œå°‡getOwner()æ–°å¢é è¨­å¯¦ä½œã€
 		clsNode.interfaces.add(IMixinIInventory.class.getName().replace('.', '/'));
 		ASMUtils.log("Successfully remove " + TARGET_METHOD_NAME + " method and add " + IMixinIInventory.class.getName()
 				+ " as a super interface for " + TARGET_CLASS);

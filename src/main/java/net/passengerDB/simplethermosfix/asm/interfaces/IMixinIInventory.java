@@ -18,7 +18,7 @@ public interface IMixinIInventory extends InventoryHolder {
 	@Override
 	default public Inventory getInventory() {
 		try {
-			// CraftInventoryªº°ß¤@¤@­Ó«Øºc¦¡¤¤ªº°Ñ¼Æ¡A¨äÃş«¬§Y¬OIInventory
+			// CraftInventoryçš„å”¯ä¸€ä¸€å€‹å»ºæ§‹å¼ä¸­çš„åƒæ•¸ï¼Œå…¶é¡å‹å³æ˜¯IInventory
 			return (Inventory) CraftInventory.class.getConstructors()[0].newInstance(this);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
 			ASMUtils.warn("An exception occure in getInventory() method. This may be a bug. Please report this to mod author.");
