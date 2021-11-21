@@ -1,0 +1,16 @@
+[
+{
+  "modid": "simplethermosfix",
+  "name": "SimpleThermosFix",
+  "description": "A mod to fix some issues about Thermos server",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["PTH_Xenon"],
+  "credits": "The Forge, FML guys, Thermos and author of dumpclass",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
