@@ -14,9 +14,7 @@ import net.passengerDB.simplethermosfix.asm.interfaces.IMixinIInventory;
  * 因為投擲器在其中呼叫了不存在原始類別中的getOwner()方法(返回類型InventoryHolder)，然而基於Forge框架開發的模組是不會去實作這個方法的，因此會導致AbstractMethodError。
  * 會引發該錯誤的實體的例子則有:魔法金屬的寵物、mekanism的Robit
  * 
- * 雖然在執行時期來說，呼叫一個方法時，無論該方法是從何而來(自行定義，來自父類別或有實作預設方法的interface)，只要「存在同樣簽署以及名子的方法」，都可以正常執行。
- * 例如，把一個沒有實作IClassTransformer的類別，定義了一個有實作內容的public byte[] transform(String name, String transformedName, byte[] data)
- * 那麼執行時期把這個類別強制轉型成IClassTransformer並呼叫其transform方法，一樣可以正常執行。
+ * 雖然以interface定義的方法來說，在執行時期，從物件呼叫該interface的方法時，在物件中無論該方法是從何而來(自行定義，來自父類別或有實作預設方法的interface)，只要「存在同樣簽署以及名子的方法」，都可以正常執行。
  * 然而，對於魔法金屬的寵物，會有一個致命的問題:
  * 寵物繼承了EntityTameable，其中有一個getOwner()方法(返回類型是Entity或EntityLivingBase，與上述的getOwner()不同)
  * 這導致寵物無法簡單的新增InventoryHolder getOwner()來適應修改後的類別，因為編譯器並不允許重載相同方法名、相同參數但返回類型不同的方法(儘管這在執行時期是可行的，因為執行時呼叫的方法簽署包含了返回類型，可以被辨認是不同的方法)
