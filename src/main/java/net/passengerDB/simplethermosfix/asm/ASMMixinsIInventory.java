@@ -32,6 +32,7 @@ import net.passengerDB.simplethermosfix.asm.interfaces.IMixinIInventory;
  * 透過修改為預設方法並不會影響到既有的沒有問題的內容。因為對於其他根據被修改後的IInventory的開發者而言，他們會看到沒有實作內容的getOwner()方法，從而在它們的實作類裡自行實作getOwner()，這樣會覆蓋掉預設方法。
  * 對於繼承了IInventory並且給予了getOwner新增預設方法的狀況:
  * 由於此解法混入的getOwner方法在繼承結構上是「更加抽象、不具體」的方法，因此這種情況下定義的getOwner方法一定是「更加具體」的方法，而會在執行時期呼叫原本的方法。
+ * 會出事的狀況基本上只有其他東西也對IInventory做了修改或asm。對同一個地方使用asm修改本來就很容易衝突。
  * 
  */
 public class ASMMixinsIInventory implements IClassTransformer {
