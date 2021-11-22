@@ -1,19 +1,11 @@
 package net.passengerDB.simplethermosfix.asm;
 
-import org.bukkit.inventory.InventoryHolder;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-import org.objectweb.asm.tree.VarInsnNode;
 
-import cpw.mods.fml.common.asm.transformers.deobf.FMLDeobfuscatingRemapper;
-import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.launchwrapper.IClassTransformer;
-import net.minecraftforge.classloading.FMLForgePlugin;
 import net.passengerDB.simplethermosfix.asm.interfaces.IMixinIInventory;
 
 /**
@@ -76,8 +68,7 @@ public class ASMMixinsIInventory implements IClassTransformer {
 
 		// 移除定義好的抽象方法getOwner()避免「getOwner()被重新定義成抽象方法」
 		boolean foundTarget = clsNode.methods.removeIf(m -> {
-			return (m.access == (Opcodes.ACC_PUBLIC | Opcodes.ACC_ABSTRACT)) && TARGET_METHOD_NAME.equals(m.name)
-					&& TARGET_DESC.equals(m.desc);
+			return (m.access == (Opcodes.ACC_PUBLIC | Opcodes.ACC_ABSTRACT)) && TARGET_METHOD_NAME.equals(m.name) && TARGET_DESC.equals(m.desc);
 		});
 
 		if (!foundTarget)
@@ -85,8 +76,7 @@ public class ASMMixinsIInventory implements IClassTransformer {
 
 		// 令其繼承有定義預設getOwner()實作的interface來「將getOwner()新增預設實作」
 		clsNode.interfaces.add(IMixinIInventory.class.getName().replace('.', '/'));
-		ASMUtils.log("Successfully remove " + TARGET_METHOD_NAME + " method and add " + IMixinIInventory.class.getName()
-				+ " as a super interface for " + TARGET_CLASS);
+		ASMUtils.log("Successfully remove " + TARGET_METHOD_NAME + " method and add " + IMixinIInventory.class.getName() + " as a super interface for " + TARGET_CLASS);
 
 		ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
 		clsNode.accept(writer);
