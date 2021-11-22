@@ -28,7 +28,7 @@ import net.passengerDB.simplethermosfix.asm.interfaces.IMixinIInventory;
  * 然而，對於魔法金屬的寵物，會有一個致命的問題:
  * 寵物繼承了EntityTameable，其中有一個getOwner()方法(返回類型是Entity或EntityLivingBase，與上述的getOwner()不同)
  * 這導致寵物無法簡單的新增InventoryHolder getOwner()來適應修改後的類別，因為編譯器並不允許重載相同方法名、相同參數但返回類型不同的方法(儘管這在執行時期是可行的，因為執行時呼叫的方法簽署包含了返回類型，可以被辨認是不同的方法)
- * 結果就是這個問題絕對不可能在編譯時期解決。
+ * 結果就是這個問題絕對不可能在編譯時期解決。(其實可以，但必須要分兩次編譯，並分別將兩次編譯好的不同版本類別「混合」在一起，這麼做非常麻煩。)
  * 
  * 因此這邊透過asm在執行時期才做修改以繞過編譯器的檢查。
  * 將被修改後的IInventory中的getOwner()移除，令其繼承自定義的介面，以達到新增以預設方法實作內容的getOwner()
