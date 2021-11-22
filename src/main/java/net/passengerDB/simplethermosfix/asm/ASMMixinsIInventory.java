@@ -70,8 +70,7 @@ public class ASMMixinsIInventory implements IClassTransformer {
 			return (m.access == (Opcodes.ACC_PUBLIC | Opcodes.ACC_ABSTRACT)) && TARGET_METHOD_NAME.equals(m.name) && TARGET_DESC.equals(m.desc);
 		});
 
-		if (!foundTarget)
-			return data;
+		if (!foundTarget) return data;
 
 		// 令其繼承有定義預設getOwner()實作的interface來「將getOwner()新增預設實作」
 		clsNode.interfaces.add(IMixinIInventory.class.getName().replace('.', '/'));
